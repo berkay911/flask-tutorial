@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}OTHER PAGE{% endblock %}
+{% block content %}
+
+    <h1>Filters</h1>
+    <p>{{ text | upper }}</p>
+    <p>{{ text | lower }}</p>
+    <p>{{ text | capitalize }}</p>
+    <p>{{ text | title }}</p>
+    <p>{{ text | replace("hello", "hi") }}</p>
+    <p>{{ text | reverse_string }}</p>
+    <p>{{ text | repeat(2) }}</p>
+    <p>{{ text | alternate_case }}</p>
+    
+
+
+{% endblock %}
