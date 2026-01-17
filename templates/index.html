@@ -2,19 +2,63 @@
 {% block title %}INDEX PAGE{% endblock %}
 {% block content %}
 
-    <h1>Welcome to the Flask App!</h1>
-    <p>{{ value }}</p>
-    <p>{{ result }}</p>
-    <p>{{ list }}</p>
-    <ul>
-    {% for item in list %}
-        {% if item == 2 %}
-            <li style="color: red;">{{ item }}</li>
-        {% else %}
-        <li>{{ item }}</li>
-        {% endif %}
-    {% endfor %}
-    </ul>
 
-    <a href="{{ url_for('other') }}">Go to Other Page</a>
+    <h1>Hello, World!</h1>
+    <form method="POST" action="{{ url_for('index') }}">
+        <input type="text" name="username" placeholder="Username"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        <input type="submit" value="Login">
+    </form>
+
+
+    <h1>File Upload</h1>
+    <form method="POST" action="{{ url_for('file_upload') }}" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/plain" required="required"><br>
+        <input type="submit" value="Upload file">
+    </form>
+
+    <h1>Convert To CSV</h1>
+    <form method="POST" action="{{ url_for('convert_csv') }}" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required="required"><br>
+        <input type="submit" value="Upload File">
+    </form>
+
+
+    <h1>Convert To CSV two </h1>
+    <form method="POST" action="{{ url_for('convert_csv_two') }}" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required="required"><br>
+        <input type="submit" value="Upload File">
+    </form>
+
+
+    <h1>Javascript JSON Request</h1>
+    <button id="post_button">Send POST Request</button>
+
+    <script type="text/javascript">
+        const postButton = document.getElementById('post_button');
+        const jsonData = {
+            "name": "John Doe",
+            "greeting": "Hello"
+        };
+        postButton.addEventListener('click', () => {
+            fetch('{{ url_for("handle_post") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+        
+    </script>
+
+
+
 {% endblock %}
