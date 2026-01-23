@@ -9,6 +9,17 @@
 <body>
     <p> EHM STUDENTS WILL TOP UP</p>
     {% block content %} Default Content {% endblock %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+    {% endwith %}
+
     <script src="/js/bootstrap.js"></script>
     
 
